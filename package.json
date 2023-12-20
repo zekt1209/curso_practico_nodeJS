@@ -1,0 +1,28 @@
+{
+  "name": "curso_practico_nodejs",
+  "version": "1.0.0",
+  "description": "Backend completo de la red social minimalista PlatziSocial. Crea microservicios con usuarios, posts, follow e interacciones.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zekt1209/curso_practico_nodeJS.git"
+  },
+  "keywords": [
+    "nodejs",
+    "javascript",
+    "sql",
+    "backend"
+  ],
+  "author": "Victor Guzman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zekt1209/curso_practico_nodeJS/issues"
+  },
+  "homepage": "https://github.com/zekt1209/curso_practico_nodeJS#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
