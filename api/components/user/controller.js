@@ -19,8 +19,8 @@ module.exports = function(injectedStorage) {
         return storage.list(TABLA);
     }
     
-    function get() {
-        return storage.get(TABLA, ID);
+    function get(id) {
+        return storage.get(TABLA, id);
     }
 
     // Devolvemos los metodos como lo haciamos antes

@@ -13,18 +13,41 @@ const router = express.Router();
 
 // Rise
 router.get('/', function(req, res, next) {
-    // res.send('Todo funciona bien !')
-    // response.success(req, res, 'Todo correcto! ', 200);
-    const lista = Controller.list();
-    response.success(req, res, lista, 200);
+    // v 1.0
+/*     res.send('Todo funciona bien !')
+    response.success(req, res, 'Todo correcto! ', 200); */
+
+    // v 2.0
+/*     const lista = Controller.list();
+    response.success(req, res, lista, 200); */
+    
+    // v 3.0
+    Controller.list()
+        .then((lista) => {
+            response.success(req, res, lista, 200);
+        })
+        .catch((err) => {
+            response.error(req, res, err, 500);
+        })
+
 })
 
 // Get
 router.get('/:id', function(req, res, next) {
     // res.send('Todo funciona bien !')
     // response.success(req, res, 'Todo correcto! ', 200);
-    const data = Controller.get(req.params.id);
-    response.success(req, res, data, 200);
+
+    // v 2.0
+/*     const data = Controller.get(req.params.id);
+    response.success(req, res, data, 200); */
+    
+    Controller.get(req.params.id)
+        .then((user) => {
+            response.success(req, res, user, 200);
+        })
+        .catch((err) => {
+            response.error(req, res, err, 500);
+        })
 })
 
 module.exports = router;
