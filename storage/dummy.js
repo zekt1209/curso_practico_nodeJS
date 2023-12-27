@@ -1,6 +1,8 @@
 const db = {
     'user': [
-        {'id': '1','name': 'Victor'}
+        {'id': '1','name': 'Victor'},
+        {'id': '2','name': 'Marco'},
+        {'id': '3','name': 'Angel'},
     ],
     'location': [
         {'id': 'S-123456', 'location_name': 'Guadalajara, Jal, Mexico'},

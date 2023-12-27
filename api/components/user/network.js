@@ -3,8 +3,8 @@ const express = require('express');
 // Llamamos al Response donde manejamos mensajes de exito o error de las peticiones a esta ruta
 const response = require('../../../network/response');
 
-
-const Controller = require('./controller');
+// Lo cambiamos a index, ya que ahi devolvemos el controlador en formade funcion (con todos los metodos de la DB)
+const Controller = require('./index')
 
 // Creates a new router object.
 const router = express.Router();
@@ -20,10 +20,10 @@ router.get('/', function(req, res, next) {
 })
 
 // Get
-router.get('/userID', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     // res.send('Todo funciona bien !')
     // response.success(req, res, 'Todo correcto! ', 200);
-    const data = Controller.get();
+    const data = Controller.get(req.params.id);
     response.success(req, res, data, 200);
 })
 
