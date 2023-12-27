@@ -10,6 +10,14 @@ const user = require('./components/user/network.js');
 const app = express();
 
 // Creamos las rutas - ROUTER (endpoints)
+// Rise
+app.get('/', (req, res) => {
+    // res.contentType('text/html')
+    res.status(200)
+    res.send('<h1>This is the RISE page</h1><p>Hey, this app was built by Victor with express.js</p>')
+})
+
+// User
 app.use('/api/user', user)
 
 // Levantamos el servidor en el puerto especificado
