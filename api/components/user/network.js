@@ -9,7 +9,7 @@ const Controller = require('./index')
 // Creates a new router object.
 const router = express.Router();
 
-
+// Usando express, esta la posibilidad de capturar los parametros enviados por el body con la linea 13
 router.use(express.json());
 
 // Creamos las diferentes endpoints para el componete "user"
