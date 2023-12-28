@@ -18,7 +18,9 @@ const app = express();
     app.get('/', (req, res) => {
         // res.contentType('text/html')
         res.status(200)
-        res.send('<h1>This is the RISE page</h1><p>Hey, this app was built by Victor with express.js</p>')
+        // res.send('<h1>This is the RISE page</h1><p>Hey, this app was built by Victor with express.js</p>')
+        res.sendFile('./index.html', {root: __dirname });
+        res.send
     })
 
     // User
