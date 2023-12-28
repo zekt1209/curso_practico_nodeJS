@@ -1,5 +1,8 @@
 // Debe tener acceso a network
 
+const nanoid = require('nanoid');
+// import nanoid from 'nanoid';
+
 const TABLA = 'user';
 const ID = '2';
 
@@ -27,8 +30,12 @@ module.exports = function(injectedStorage) {
         // return storage.upsert(TABLA, data);
 
         // Validamos que no vengan vacios o nulos la data
-        if (!id || !name) {
-            return Promise.reject('No se indico el id o el nombre');
+        if (!name) {
+            return Promise.reject('No se indico el nombre');
+        }
+
+        if (!id) {
+            id = nanoid();
         }
 
         // Construimos el objeto a insertar con la data que nos viene
