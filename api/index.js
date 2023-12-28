@@ -1,5 +1,9 @@
 const express = require('express');
 
+// Documentacion de nuestra API
+const swaggerUi = require('swagger-ui-express');
+const swaggerDoc = require('./swagger.json');
+
 // Llamamos al archivo de config.js donde exportamos el puerto
 const config = require('../config.js');
 
@@ -19,6 +23,9 @@ const app = express();
 
     // User
     app.use('/api/user', user)
+
+    // Documentacion
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
 
 // Levantamos el servidor en el puerto especificado
 app.listen(config.api.port, () => {

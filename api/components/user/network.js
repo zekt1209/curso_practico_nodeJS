@@ -19,24 +19,24 @@ router.post('/', upsert);
 router.put('/', upsert);
 router.delete('/:id', remove);
 
-// Rise
+// List
 function list(req, res, next) {
     // v 1.0
-/*     res.send('Todo funciona bien !')
+    /*     res.send('Todo funciona bien !')
     response.success(req, res, 'Todo correcto! ', 200); */
-
+    
     // v 2.0
-/*     const lista = Controller.list();
+    /*     const lista = Controller.list();
     response.success(req, res, lista, 200); */
     
     // v 3.0
     Controller.list()
-        .then((lista) => {
-            response.success(req, res, lista, 200);
-        })
-        .catch((err) => {
-            response.error(req, res, err, 500);
-        })
+    .then((lista) => {
+        response.success(req, res, lista, 200);
+    })
+    .catch((err) => {
+        response.error(req, res, err, 500);
+    })
 }
 
 // Get
@@ -57,7 +57,7 @@ function get(req, res, next) {
         });
 }
 
-// upsert
+// Upsert
 function upsert(req, res, next) {
 
     Controller.upsert(req.body)
@@ -70,17 +70,16 @@ function upsert(req, res, next) {
 
 }
 
-// remove
+// Remove
 function remove(req, res, next) {
 
-    Controller.upsert(req.body)
-        .then(user => {
-            response.success(req, res, user, 200);
+    Controller.remove(req.params.id)
+        .then(() => {
+            response.success(req, res, `El usuario con id: ${req.params.id} Se elimino correctamente`, 200);
         })
         .catch(err => {
             response.error(req, res, err, 500);
         });
-
 }
 
 module.exports = router;

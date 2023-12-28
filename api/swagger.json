@@ -1,0 +1,276 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Platzi Red Social - OpenAPI 3.0",
+      "description": "Una red social en NodeJS",
+      "version": "1.0.0"
+    },
+    "externalDocs": {
+      "description": "Find out source code on GitHub",
+      "url": "https://github.com/zekt1209/curso_practico_nodeJS"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000/api/user"
+      }
+    ],
+    "tags": [
+      {
+        "name": "user",
+        "description": "Operaciones sobre el usuario"
+      }
+    ],
+    "paths": {
+      "/api/user": {
+        "get": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Lista usuarios existentes en la DB",
+          "description": "",
+          "parameters": [],
+          "operationId": "listUsers",
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Error del servidor al consultar base de datos"
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Crea un usuario",
+          "description": "Crea un usuario en nuestra app.",
+          "operationId": "createUser",
+          "requestBody": {
+            "description": "Created user object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "responses": {
+            "default": {
+              "description": "Usuario creado",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/user/{userId}": {
+        "get": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Consulta al usuario por ID",
+          "description": "",
+          "operationId": "Consultar usuario",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "description": "ID del usuario a consultar",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid userId"
+            },
+            "500": {
+              "description": "Error del servidor al consultar base de datos"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Actualiza al usuario",
+          "description": "Se actualiza el usuario mediante el id",
+          "operationId": "updateUser",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "description": "id del usuario que se necesita actualizar",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "Actualiza un usuario existente en la base de datos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "responses": {
+            "default": {
+              "description": "successful operation"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Elimina usuario",
+          "description": "Se elimina el usuario mediante el id",
+          "operationId": "deleteUser",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "description": "El id del usuario que se necesita eliminar",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successfull operation"
+            },
+            "400": {
+              "description": "ID de usuario invalido"
+            },
+            "404": {
+              "description": "Usuario no encontrado"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "User": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64",
+              "example": 10
+            },
+            "name": {
+              "type": "string",
+              "example": "Victor"
+            },
+            "password": {
+              "type": "string",
+              "example": "12345"
+            }
+          },
+          "xml": {
+            "name": "user"
+          }
+        },
+        "ApiResponse": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "type": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          },
+          "xml": {
+            "name": "##default"
+          }
+        }
+      },
+      "requestBodies": {
+        "Pet": {
+          "description": "Pet object that needs to be added to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pet"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Pet"
+              }
+            }
+          }
+        },
+        "UserArray": {
+          "description": "List of user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "securitySchemes": {
+        "petstore_auth": {
+          "type": "oauth2",
+          "flows": {
+            "implicit": {
+              "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
+              "scopes": {
+                "write:pets": "modify pets in your account",
+                "read:pets": "read your pets"
+              }
+            }
+          }
+        },
+        "api_key": {
+          "type": "apiKey",
+          "name": "api_key",
+          "in": "header"
+        }
+      }
+    }
+  }

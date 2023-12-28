@@ -50,6 +50,9 @@ module.exports = function(injectedStorage) {
     }
 
     function remove(id) {
+        if (!id) {
+            return Promise.reject('No se indico el id del usuario');
+        }
         return storage.remove(TABLA, id);
     }
 
