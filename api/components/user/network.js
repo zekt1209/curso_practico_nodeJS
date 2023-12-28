@@ -13,9 +13,14 @@ const Controller = require('./index')
 router.use(express.json());
 
 // Creamos las diferentes endpoints para el componete "user"
+router.get('/', list);
+router.get('/:id', get);
+router.post('/', upsert);
+router.put('/', upsert);
+router.delete('/:id', remove);
 
 // Rise
-router.get('/', function(req, res, next) {
+function list(req, res, next) {
     // v 1.0
 /*     res.send('Todo funciona bien !')
     response.success(req, res, 'Todo correcto! ', 200); */
@@ -32,11 +37,10 @@ router.get('/', function(req, res, next) {
         .catch((err) => {
             response.error(req, res, err, 500);
         })
-
-})
+}
 
 // Get
-router.get('/:id', function(req, res, next) {
+function get(req, res, next) {
     // res.send('Todo funciona bien !')
     // response.success(req, res, 'Todo correcto! ', 200);
 
@@ -51,10 +55,10 @@ router.get('/:id', function(req, res, next) {
         .catch((err) => {
             response.error(req, res, err, 500);
         });
-})
+}
 
 // upsert
-router.post('/', function(req, res, next) {
+function upsert(req, res, next) {
 
     Controller.upsert(req.body)
         .then(user => {
@@ -64,18 +68,19 @@ router.post('/', function(req, res, next) {
             response.error(req, res, err, 500);
         });
 
-})
+}
 
 // remove
-router.delete('/:id', function(req, res, next) {
+function remove(req, res, next) {
 
-    Controller.remove(req.params.id)
-        .then(() => {
-            response.success(req, res, `El usuario con id: ${req.params.id} Se elimino correctamente`, 200);
+    Controller.upsert(req.body)
+        .then(user => {
+            response.success(req, res, user, 200);
         })
         .catch(err => {
             response.error(req, res, err, 500);
         });
-})
+
+}
 
 module.exports = router;
