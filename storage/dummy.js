@@ -14,6 +14,11 @@ const db = {
 
 async function list(table) {
     return db[table];
+/*  [
+        { id: '1', name: 'Victor' },
+        { id: '2', name: 'Marco' },
+        { id: '3', name: 'Angel' }
+    ] */
 }
 
 async function get(table, id) {
@@ -22,10 +27,18 @@ async function get(table, id) {
 }
 
 async function upsert(table, data) {
-    db[collection].push(data);
+/*     let collection = await list(table);
+    collection.push(data); */
+    db[table].push(data);
+    return data;
 }
 
 async function remove(table, id) {
+    // let collection = await list(table);
+    const index = db[table].findIndex(item => item.id === id);
+    if (index != -1) {
+        db[table].splice(index, 1);
+    }
     return true;
 }
 

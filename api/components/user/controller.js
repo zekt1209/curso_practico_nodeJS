@@ -23,10 +23,35 @@ module.exports = function(injectedStorage) {
         return storage.get(TABLA, id);
     }
 
+    function upsert({id = null, name = null}) {
+        // return storage.upsert(TABLA, data);
+
+        // Validamos que no vengan vacios o nulos la data
+        if (!id || !name) {
+            return Promise.reject('No se indico el id o el nombre');
+        }
+
+        // Construimos el objeto a insertar con la data que nos viene
+        const user = {
+            id,
+            name
+        };
+
+        // Resolvemos promesa
+        return storage.upsert(TABLA, user);
+
+    }
+
+    function remove(id) {
+        return storage.remove(TABLA, id);
+    }
+
     // Devolvemos los metodos como lo haciamos antes
     return {
         list,
         get,
+        upsert,
+        remove
     }
 
 }

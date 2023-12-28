@@ -9,6 +9,9 @@ const Controller = require('./index')
 // Creates a new router object.
 const router = express.Router();
 
+
+router.use(express.json());
+
 // Creamos las diferentes endpoints para el componete "user"
 
 // Rise
@@ -47,7 +50,32 @@ router.get('/:id', function(req, res, next) {
         })
         .catch((err) => {
             response.error(req, res, err, 500);
+        });
+})
+
+// upsert
+router.post('/', function(req, res, next) {
+
+    Controller.upsert(req.body)
+        .then(user => {
+            response.success(req, res, user, 200);
         })
+        .catch(err => {
+            response.error(req, res, err, 500);
+        });
+
+})
+
+// remove
+router.delete('/:id', function(req, res, next) {
+
+    Controller.remove(req.params.id)
+        .then(() => {
+            response.success(req, res, `El usuario con id: ${req.params.id} Se elimino correctamente`, 200);
+        })
+        .catch(err => {
+            response.error(req, res, err, 500);
+        });
 })
 
 module.exports = router;
