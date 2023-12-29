@@ -1,6 +1,6 @@
 const db = {
     'user': [
-        {'id': '1','name': 'Victor'},
+        {'id': '1','name': 'Victor', 'username': 'zekt1298'},
         {'id': '2','name': 'Marco'},
         {'id': '3','name': 'Angel'},
     ],
@@ -29,8 +29,16 @@ async function get(table, id) {
 async function upsert(table, data) {
 /*     let collection = await list(table);
     collection.push(data); */
+
+    if (!db[table]) {
+        db[table] = [];
+    }
+    
     db[table].push(data);
-    return data;
+    
+    console.log(db);
+
+    // return data;
 }
 
 async function remove(table, id) {
