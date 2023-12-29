@@ -1,6 +1,6 @@
 const db = {
     'user': [
-        {'id': '1','name': 'Victor', 'username': 'zekt1298'},
+        {'id': '1','name': 'Victor', 'username': 'zekt1209'},
         {'id': '2','name': 'Marco'},
         {'id': '3','name': 'Angel'},
     ],
@@ -13,7 +13,7 @@ const db = {
 // Funciones de nuestra base de datos dummy (CRUD)
 
 async function list(table) {
-    return db[table];
+    return db[table] || [];
 /*  [
         { id: '1', name: 'Victor' },
         { id: '2', name: 'Marco' },
@@ -38,7 +38,7 @@ async function upsert(table, data) {
     
     console.log(db);
 
-    // return data;
+    return data;
 }
 
 async function remove(table, id) {
@@ -50,9 +50,26 @@ async function remove(table, id) {
     return true;
 }
 
+async function query(table, q) {
+    let collection = await list(table);
+
+    // collection
+    // { id: '4', username: 'wokenluis', password: 'secretPassword' }
+    // { id: '5', username: 'zekt1209', password: 'secretPassword' }
+
+    // q
+    // {username: 'zekt1209'}
+
+    let keys = Object.keys(q)
+    let key = keys[0];
+
+    return collection.filter(item => item[key] === q[key])[0] || null;
+}
+
 module.exports = {
     list,
     get,
     upsert,
-    remove
+    remove,
+    query,
 }

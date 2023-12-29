@@ -9,6 +9,8 @@ const config = require('../config.js');
 
 // Llamamos a la parte de red de nuestro componente "user"
 const user = require('./components/user/network.js');
+// Llamamos a la parte de red de nuestro componente "auth"
+const auth = require('./components/auth/network.js');
 
 // Creamos la aplicacion de express
 const app = express();
@@ -24,7 +26,10 @@ const app = express();
     })
 
     // User
-    app.use('/api/user', user)
+    app.use('/api/user', user);
+    
+    // Auth
+    app.use('/api/auth', auth);
 
     // Documentacion
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))

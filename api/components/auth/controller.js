@@ -1,6 +1,7 @@
 // Debe tener acceso a network
 
 const nanoid = require('nanoid');
+const token = require('../../../token/index');
 
 const TABLA = 'auth';
 
@@ -13,6 +14,19 @@ module.exports = function(injectedStorage) {
     // Si no viene alguna DB inyectada, o viene algun valor no valido, usamos directamente nuestra DB dummy
     if (!storage) {
         storage = require('../../../storage/dummy');
+    }
+
+    async function login(username, password) {
+        // Hacemos un query a la base de datos para sacar el username y password
+        const data = await storage.query(TABLA, { username: username })
+        if (data.password === password) {
+            // Generar token;
+            // return 'TOKEN';
+            return token.sign(data);
+        } else {
+            throw new Error('Informacion invalida')
+        }
+        // return data;
     }
 
 
@@ -42,7 +56,8 @@ module.exports = function(injectedStorage) {
 
     // Devolvemos los metodos como lo haciamos antes
     return {
-        upsert
+        upsert,
+        login,
     }
 
 }
