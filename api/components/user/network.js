@@ -35,7 +35,7 @@ function list(req, res, next) {
         response.success(req, res, lista, 200);
     })
     .catch((err) => {
-        response.error(req, res, err, 500);
+        response.error(req, res, err.message, 500);
     })
 }
 
@@ -53,7 +53,7 @@ function get(req, res, next) {
             response.success(req, res, user, 200);
         })
         .catch((err) => {
-            response.error(req, res, err, 500);
+            response.error(req, res, err.message, 500);
         });
 }
 
@@ -61,11 +61,11 @@ function get(req, res, next) {
 function upsert(req, res, next) {
 
     Controller.upsert(req.body)
-        .then(user => {
+        .then((user) => {
             response.success(req, res, user, 200);
         })
-        .catch(err => {
-            response.error(req, res, err, 500);
+        .catch((err) => {
+            response.error(req, res, err.message, 500);
         });
 
 }
@@ -78,7 +78,7 @@ function remove(req, res, next) {
             response.success(req, res, `El usuario con id: ${req.params.id} Se elimino correctamente`, 200);
         })
         .catch(err => {
-            response.error(req, res, err, 500);
+            response.error(req, res, err.message, 500);
         });
 }
 
