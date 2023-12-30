@@ -22,6 +22,11 @@ const check = {
         // 1- Decodificar el token
         const decoded = decodeHeader(req);
         console.log(decoded);
+
+        // Comprbar si es o no propio
+/*         if (decoded.id !== owner) {
+            throw new Error('No puedes hacer esto');
+        } */
     },
 }
 
@@ -65,4 +70,5 @@ function decodeHeader(req) { // Una vez tengamos la request, generaremos el toke
 
 module.exports = {
     sign,
+    check,
 }
