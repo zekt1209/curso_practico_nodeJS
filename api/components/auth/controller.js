@@ -1,10 +1,9 @@
 // Debe tener acceso a network
 
-const nanoid = require('nanoid');
+const bcrypt = require('bcrypt');
 const token = require('../../../token/index');
 
 const TABLA = 'auth';
-
 
 module.exports = function(injectedStorage) {
 
@@ -19,18 +18,24 @@ module.exports = function(injectedStorage) {
     async function login(username, password) {
         // Hacemos un query a la base de datos para sacar el username y password
         const data = await storage.query(TABLA, { username: username })
-        if (data.password === password) {
-            // Generar token;
-            // return 'TOKEN';
-            return token.sign(data);
-        } else {
-            throw new Error('Informacion invalida')
-        }
+
+        // Encadenamos promess para en ves de devolver true o false si la contraseña hasheada es la que tenemos en la base de datos, nos devuelva el token
+        return bcrypt.compare(password, data.password)
+            .then(sonIguales => {
+                if (sonIguales === true) {
+                    // Generar token;
+                    // return 'TOKEN';
+                    return token.sign(data);
+                } else {
+                    throw new Error('Informacion invalida')
+                }
+            })
+
         // return data;
     }
 
-
-    function upsert(data) {
+    // Esta funcion se ejecuta en el controlador de usuario, para mandar la contraseña desde ahi
+    async function upsert(data) {
 
         // Crea un id
         const authData = {
@@ -46,7 +51,7 @@ module.exports = function(injectedStorage) {
 
         // Si hay un password -> lo actualiza
         if (data.password) {
-            authData.password = data.password;
+            authData.password = await bcrypt.hash(data.password, 5);
         }
 
         // Resuelve promesa, devuelve la funcion a base de datos que sabemos que va a ser una promesa
