@@ -26,9 +26,9 @@ const check = {
         console.log(decoded);
 
         // Comprbar si es o no propio
-        /*         if (decoded.id !== owner) {
-            throw new Error('No puedes hacer esto');
-        } */
+        if (decoded.id !== owner) {
+            throw new Error("No puedes hacer esto");
+        }
     },
 };
 
