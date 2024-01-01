@@ -2,6 +2,8 @@
 
 const bcrypt = require('bcrypt');
 const token = require('../../../token/index');
+// Modulo para gestion avanzada de errores
+const error = require("../../../utils/error");
 
 const TABLA = 'auth';
 
@@ -27,7 +29,7 @@ module.exports = function(injectedStorage) {
                     // return 'TOKEN';
                     return token.sign(data);
                 } else {
-                    throw new Error('Informacion invalida')
+                    throw error('Informacion invalida', 401);
                 }
             })
 

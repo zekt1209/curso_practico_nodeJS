@@ -13,7 +13,7 @@ function verify(token) {
     try {
         return jwt.verify(token, secret);
     } catch (error) {
-        throw new Error(error.message);
+        throw new error('error.message', 401);
     }
 }
 
@@ -40,12 +40,12 @@ function getToken(auth) {
 
     // Asegurarnos de que venga un header o no
     if (!auth) {
-        throw new Error("No viene token");
+        throw error("No viene token", 401);
     }
 
     // Asegurarnos que el formato del token sea correcto 'Bearer token'
     if (auth.indexOf("Bearer ") == -1) {
-        throw new Error("Formato de token invalido");
+        throw new error("Formato de token invalido", 401);
     }
 
     // - Tenemos que quitar el 'Bearer '

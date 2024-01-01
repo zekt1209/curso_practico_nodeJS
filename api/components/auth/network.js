@@ -18,9 +18,10 @@ router.post('/login', function(req, res, next) {
         .then(token => {
             response.success(req, res, token, 200);
         })
-        .catch(err => {
+/*         .catch(err => {
             response.error(req, res, 'Información invalida', 400);
-        })
+        }) */
+        .catch(next);
 })
 
 module.exports = router;
