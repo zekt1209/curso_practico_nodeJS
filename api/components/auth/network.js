@@ -1,27 +1,27 @@
 // auth
 
-const express = require('express');
+const express = require("express");
 // Creates a new router object.
 const router = express.Router();
 
 // Llamamos al Response donde manejamos mensajes de exito o error de las peticiones a esta ruta
-const response = require('../../../network/response');
+const response = require("../../../network/response");
 
 // Lo cambiamos a index, ya que ahi devolvemos el controlador en formade funcion (con todos los metodos de la DB)
-const Controller = require('./index')
+const Controller = require("./index");
 
 // Usando express, esta la posibilidad de capturar los parametros enviados por el body con la linea 13
 router.use(express.json());
 
-router.post('/login', function(req, res, next) {
+router.post("/login", function (req, res, next) {
     Controller.login(req.body.username, req.body.password)
-        .then(token => {
+        .then((token) => {
             response.success(req, res, token, 200);
         })
-/*         .catch(err => {
-            response.error(req, res, 'Información invalida', 400);
-        }) */
-        .catch(next);
-})
+        .catch((err) => {
+            response.error(req, res, "Información invalida", 400);
+        });
+    // .catch(next);
+});
 
 module.exports = router;

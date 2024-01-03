@@ -1,38 +1,36 @@
 // Debe tener acceso a network
 
-const nanoid = require('nanoid');
-const auth = require('../auth');
+const nanoid = require("nanoid");
+const auth = require("../auth");
 // import nanoid from 'nanoid';
 
-const TABLA = 'user';
-const ID = '2';
+const TABLA = "user";
+const ID = "2";
 
-
-module.exports = function(injectedStorage) {
-
+module.exports = function (injectedStorage) {
     // Le decimos que estaremos usando la DB que le inyerctamos en el index.js del usuario
     let storage = injectedStorage;
 
     // Si no viene alguna DB inyectada, o viene algun valor no valido, usamos directamente nuestra DB dummy
     if (!storage) {
-        storage = require('../../../storage/dummy');
+        storage = require("../../../storage/dummy");
     }
 
     // Metimos aqui en el export estas funciones que hace la DB, para que tome la DB que le inyectamos
     function list() {
         return storage.list(TABLA);
     }
-    
+
     function get(id) {
         return storage.get(TABLA, id);
     }
 
-    async function upsert({id = null, name = null, username = null, password}) {
+    async function upsert({ id = null, name = null, username = null, password }) {
         // return storage.upsert(TABLA, data);
 
         // Validamos que no vengan vacios o nulos la data
         if (!username) {
-            return Promise.reject('No se indico el nombre de usuario');
+            return Promise.reject("No se indico el nombre de usuario");
         }
 
         // Si no viene un id, asignamos uno automaticamente
@@ -42,9 +40,8 @@ module.exports = function(injectedStorage) {
 
         // Si no viene un name, asignamos uno automaticamente
         if (!name) {
-            name = 'Unknown';
+            name = "Unknown";
         }
-
 
         // Construimos el objeto a insertar con la data que nos viene
         const user = {
@@ -59,22 +56,28 @@ module.exports = function(injectedStorage) {
             await auth.upsert({
                 id: user.id,
                 username: user.username,
-                password: password
-            })
+                password: password,
+            });
         }
 
         // -----------------------------------------------------------------------
 
         // Resolvemos promesa
         return storage.upsert(TABLA, user);
-
     }
 
     function remove(id) {
         if (!id) {
-            return Promise.reject('No se indico el id del usuario');
+            return Promise.reject("No se indico el id del usuario");
         }
         return storage.remove(TABLA, id);
+    }
+
+    function follow(fromId, toId) {
+        return storage.upsert(`${TABLA}_follow`, {
+            user_from: fromId,
+            user_to: toId,
+        });
     }
 
     // Devolvemos los metodos como lo haciamos antes
@@ -82,10 +85,10 @@ module.exports = function(injectedStorage) {
         list,
         get,
         upsert,
-        remove
-    }
-
-}
+        remove,
+        follow,
+    };
+};
 
 /* module.exports = {
     list,

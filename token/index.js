@@ -13,7 +13,7 @@ function verify(token) {
     try {
         return jwt.verify(token, secret);
     } catch (error) {
-        throw new error('error.message', 401);
+        throw new error("error.message", 401);
     }
 }
 
@@ -32,6 +32,10 @@ const check = {
             throw error("No puedes hacer esto", 401);
             // throw new Error("No puedes hacer esto");
         }
+    },
+    logged: function (req) {
+        // 1- Decodificar el token
+        const decoded = decodeHeader(req);
     },
 };
 

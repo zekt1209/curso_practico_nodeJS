@@ -17,7 +17,7 @@ router.use(express.json());
 // Creamos las diferentes endpoints para el componete "user"
 router.get("/", list);
 router.get("/:id", get);
-// router.post("/follow/:id", follow);
+router.post("/follow/:id", secure("follow"), follow);
 router.post("/", upsert);
 router.put("/", secure("update"), upsert);
 router.delete("/:id", remove);
@@ -80,6 +80,15 @@ function remove(req, res, next) {
         .catch((err) => {
             response.error(req, res, err.message, 500);
         });
+}
+
+// Follow
+function follow(req, res, next) {
+    Controller.follow(req.user.id, req.params.id)
+        .then((data) => {
+            response.success(req, res, data, 201);
+        })
+        .catch(next);
 }
 
 module.exports = router;

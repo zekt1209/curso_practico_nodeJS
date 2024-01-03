@@ -22,6 +22,12 @@ module.exports = function checkAuth(action) {
                 next();
                 break;
 
+            case "follow":
+                // Necesitamos un token para de ahi tomar el ID del user y saber que es el mismo que esta registrado en la DB
+                token.check.logged(req);
+                next();
+                break;
+
             default:
                 next();
         }

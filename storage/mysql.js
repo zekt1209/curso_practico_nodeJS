@@ -88,10 +88,21 @@ function update(table, data) {
 }  */
 
 async function upsert(table, data) {
-    const row = await get(table, data.id);
+    // Operacion para tabla user
+    /* if (table == 'user') {
+    } */
+    let row = [];
+
+    if (data.id) {
+        // Valida si ya existe ese usuario en la DB
+        row = await get(table, data.id);
+    }
+
     if (row.length === 0) {
+        // No existe
         return insert(table, data);
     } else {
+        // Si existe
         return update(table, data);
     }
 }
