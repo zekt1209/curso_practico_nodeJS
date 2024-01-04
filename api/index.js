@@ -7,10 +7,16 @@ const swaggerDoc = require("./swagger.json");
 // Llamamos al archivo de config.js donde exportamos el puerto
 const config = require("../config.js");
 
+
+// ------------- Componentes --------------------------------
 // Llamamos a la parte de red de nuestro componente "user"
 const user = require("./components/user/network.js");
 // Llamamos a la parte de red de nuestro componente "auth"
 const auth = require("./components/auth/network.js");
+// Llamamos a la parte de red de nuestro componente "post"
+const post = require("./components/post/network.js");
+// ----------------------------------------------------------
+
 
 // En este archivo gestionamos los errores para mandar mensajes y statusCodes segun el error que vayamos a lanzar
 const { errors } = require("../network/errors");
@@ -18,6 +24,8 @@ const { errors } = require("../network/errors");
 // Creamos la aplicacion de express
 const app = express();
 
+
+// ------------- Rutas --------------------------------------
 // Creamos las rutas - ROUTER (endpoints)
 // Rise
 app.get("/", (req, res) => {
@@ -30,12 +38,14 @@ app.get("/", (req, res) => {
 
 // User
 app.use("/api/user", user);
-
 // Auth
 app.use("/api/auth", auth);
-
+// Post
+app.use("/api/post", post);
 // Documentacion
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+
+// ----------------------------------------------------------
 
 // Gestion de errores
 app.use(errors);
