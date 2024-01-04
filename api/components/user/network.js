@@ -18,6 +18,7 @@ router.use(express.json());
 router.get("/", list);
 router.get("/:id", get);
 router.post("/follow/:id", secure("follow"), follow);
+router.get("/:id/following", following);
 router.post("/", upsert);
 router.put("/", secure("update"), upsert);
 router.delete("/:id", remove);
@@ -90,5 +91,15 @@ function follow(req, res, next) {
         })
         .catch(next);
 }
+
+// Devuelve los usuarios que esta siguiendo el usuario logueado
+function following(req, res, next) {
+    // Devuelve los usuarios que esta siguiendo el usuario con el ID que se le indique
+    return Controller.following(req.param.id)
+        .then((data) => {
+            return response.success(req, res, data, 200);
+        })
+        .catch(next);
+} 
 
 module.exports = router;

@@ -107,6 +107,7 @@ async function upsert(table, data) {
     }
 }
 
+// Old Structure - before following function 
 function query(table, query) {
     return new Promise((resolve, reject) => {
         connection.query(`SELECT * FROM ${table} WHERE ?`, query, (err, res) => {
@@ -115,6 +116,23 @@ function query(table, query) {
         });
     });
 }
+
+/* function query(table, query, join) {
+
+    // Esto es necesario para la funcion de obtener followers
+    let joinQuery = '';
+    if (join) {
+
+    }
+
+    return new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM ${table} WHERE ?`, query, (err, res) => {
+            if (err) return reject(err);
+            resolve(res[0] || null);
+        });
+    });
+} */
+
 
 function remove(table, id) {
     return new Promise((resolve, reject) => {
