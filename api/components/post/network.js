@@ -15,6 +15,11 @@ router.use(express.json());
 // Creamos las diferentes endpoints para el componete "user"
 router.get("/", list);
 
+// RETO de clase crear el resto de funciones para poder 
+// - añadir un post
+// - leer un post por id
+// - editar un post
+
 // ----------------------------------------------------------
 
 // ------------- Functions ----------------------------------
