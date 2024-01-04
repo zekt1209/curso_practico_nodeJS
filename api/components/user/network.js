@@ -92,12 +92,12 @@ function follow(req, res, next) {
         .catch(next);
 }
 
-// Devuelve los usuarios que esta siguiendo el usuario logueado
+// Devuelve los usuarios que esta siguiendo el usuario con el ID que le indiquemos
 function following(req, res, next) {
-    // Devuelve los usuarios que esta siguiendo el usuario con el ID que se le indique
-    return Controller.following(req.param.id)
+    // Tenemos que mandarle el ID del usuario del que queremos consultar a la gente que sigue
+    return Controller.following(req.params.id)
         .then((data) => {
-            return response.success(req, res, data, 200);
+            return response.success(req, res, data, 203);
         })
         .catch(next);
 } 

@@ -80,15 +80,15 @@ module.exports = function (injectedStorage) {
         });
     }
 
-    async function following(userId) {
-        const join = {}
+    async function following(user) {
+        const join = {};
         // Crear objeto de este estilo,
         // Poder crear y traernos los datos del usuario al user_to
         // Esto lo haremos con un JOIN de mysql, en la funcion query de la DB para: Poder traernos los datos del 
-        join[TABLA] = 'user_to' // {user: user_to}
-        const query = { user_from: userId }
+        join[TABLA] = 'user_to'; // {user: user_to}
+        const query = { user_from: user };
 
-        return await storage.query(`${TABLA}_follow`, query, join)
+        return await storage.query(`${TABLA}_follow`, query, join);
     }
 
     // Devolvemos los metodos como lo haciamos antes

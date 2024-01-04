@@ -108,23 +108,7 @@ async function upsert(table, data) {
 }
 
 // Old Structure - before following function 
-function query(table, query) {
-    return new Promise((resolve, reject) => {
-        connection.query(`SELECT * FROM ${table} WHERE ?`, query, (err, res) => {
-            if (err) return reject(err);
-            resolve(res[0] || null);
-        });
-    });
-}
-
-/* function query(table, query, join) {
-
-    // Esto es necesario para la funcion de obtener followers
-    let joinQuery = '';
-    if (join) {
-
-    }
-
+/* function query(table, query) {
     return new Promise((resolve, reject) => {
         connection.query(`SELECT * FROM ${table} WHERE ?`, query, (err, res) => {
             if (err) return reject(err);
@@ -132,6 +116,25 @@ function query(table, query) {
         });
     });
 } */
+
+function query(table, query, join) {
+
+    // Esto es necesario para la funcion de obtener followers
+    let joinQuery = '';
+    if (join) {
+        const key = Object.keys(join)[0];
+        const val = join[key];
+        joinQuery = `JOIN ${key} ON ${table}.${val} = ${key}.id`;
+    }
+
+    return new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM ${table} ${joinQuery} WHERE ${table}.?`, query, (err, res) => {
+            if (err) return reject(err);
+            resolve(res[0] || null); // -> Devuelve solo 1 follower (registros)
+            // resolve(res || null); // -> Devuelve un array con todos los followers (registros)
+        });
+    });
+}
 
 
 function remove(table, id) {
