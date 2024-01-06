@@ -14,8 +14,25 @@ module.exports = function(injectedStorage) {
         return storage.list(TABLA);
     }
 
+    function get(id) {
+        return storage.get(TABLA, id);
+    }
+
+    function insert(body) {
+        // Agregar Validacion de que solo se puede postear si el id del TOKEN del usuario coincide con el id del user
+
+        return storage.insert(TABLA, body);
+    }
+
+    function update(body) {
+        return storage.update(TABLA, body);
+    }
+
     return {
         list,
+        get,
+        insert,
+        update,
     };
 
 }

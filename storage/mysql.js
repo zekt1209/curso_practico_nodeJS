@@ -157,6 +157,8 @@ module.exports = {
     list,
     get,
     upsert,
+    insert,
+    update,
     query,
     remove,
 };

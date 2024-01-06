@@ -14,6 +14,9 @@ router.use(express.json());
 // ------------- endpoints ----------------------------------
 // Creamos las diferentes endpoints para el componete "user"
 router.get("/", list);
+router.get("/:id", get);
+router.post("/", insert);
+router.put("/:id", update);
 
 // RETO de clase crear el resto de funciones para poder 
 // - añadir un post
@@ -26,10 +29,35 @@ router.get("/", list);
 function list(req, res, next) {
     Controller.list()
         .then(data => {
-            response.success(req, res, data, 200);
+            response.success(req, res, data, 203);
         })
         .catch(next);
 }
+
+function get(req, res, next) {
+    Controller.get(req.params.id)
+        .then(data => {
+            response.success(req, res, data, 203);
+        })
+        .catch(next);
+}
+
+function insert(req, res, next) {
+    Controller.insert(req.body)
+        .then(post => {
+            response.success(req, res, post, 203);
+        })
+        .catch(next);
+    }
+
+function update(req, res, next) {
+    Controller.update(req.body)
+        .then(post => {
+            response.success(req, res, post, 203);
+        })
+        .catch(next);
+}
+
 
 // ----------------------------------------------------------
 
