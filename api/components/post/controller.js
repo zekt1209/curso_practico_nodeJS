@@ -57,10 +57,6 @@ module.exports = function(injectedStorage) {
             return row;
         }
 
-/*         return storage.query(TABLA, {
-            user: userId
-        }) */
-
     }
 
     return {
