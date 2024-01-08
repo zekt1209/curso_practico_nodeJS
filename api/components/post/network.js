@@ -16,7 +16,8 @@ router.use(express.json());
 router.get("/", list);
 router.get("/:id", get);
 router.post("/", insert);
-router.put("/:id", update);
+router.put("/", update);
+router.delete("/:id", remove);
 
 // RETO de clase crear el resto de funciones para poder 
 // - añadir un post
@@ -54,6 +55,14 @@ function update(req, res, next) {
     Controller.update(req.body)
         .then(post => {
             response.success(req, res, post, 203);
+        })
+        .catch(next);
+}
+
+function remove(req, res, next) {
+    Controller.remove(req.params.id)
+        .then(() => {
+            response.success(req, res, `El post con id: ${req.params.id} Se elimino correctamente`, 200);  
         })
         .catch(next);
 }
