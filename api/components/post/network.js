@@ -15,6 +15,7 @@ router.use(express.json());
 // Creamos las diferentes endpoints para el componete "user"
 router.get("/", list);
 router.get("/:id", get);
+router.get("/user/:userId", getByUser);
 router.post("/", insert);
 router.put("/", update);
 router.delete("/:id", remove);
@@ -65,6 +66,14 @@ function remove(req, res, next) {
             response.success(req, res, `El post con id: ${req.params.id} Se elimino correctamente`, 200);  
         })
         .catch(next);
+}
+
+function getByUser(req, res, next) {
+    Controller.getByUser(req.params.userId)
+    .then(posts => {
+        response.success(req, res, posts, 203);
+    })
+    .catch(next);
 }
 
 

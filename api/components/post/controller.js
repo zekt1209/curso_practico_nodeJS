@@ -43,12 +43,33 @@ module.exports = function(injectedStorage) {
         return storage.remove(TABLA, id);
     }
 
+    async function getByUser(userId) {
+        let row = [];
+
+        row = await storage.query(TABLA, {
+            user: userId
+        })
+
+        if(row.length === 0) {
+            return 'El usuario con ese ID no tienen posts aun';
+        } else {
+
+            return row;
+        }
+
+/*         return storage.query(TABLA, {
+            user: userId
+        }) */
+
+    }
+
     return {
         list,
         get,
         insert,
         update,
         remove,
+        getByUser,
     };
 
 }
