@@ -6,6 +6,7 @@ module.exports = {
         secret: process.env.JWT_SECRET || 'secreto',
     },
     mysql: {
+        // Link del host de mysql: https://www.freemysqlhosting.ne
         host: process.env.MYSQL_HOST || 'sql10.freemysqlhosting.net',
         user: process.env.MYSQL_USER || 'sql10675580',
         password: process.env.MYSQL_PASSWORD || 'eTftaagAxc',

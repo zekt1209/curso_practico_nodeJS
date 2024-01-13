@@ -19,7 +19,8 @@ router.post("/login", function (req, res, next) {
             response.success(req, res, token, 200);
         })
         .catch((err) => {
-            response.error(req, res, "Información invalida", 400);
+            console.log(err);
+            response.error(req, res, 'Informacion Invalida funcion Login/network', 400);
         });
     // .catch(next);
 });
