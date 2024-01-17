@@ -5,13 +5,14 @@ const config = require('../config');
 
 const app = express();
 
+// Forma estandar para comunicarnos con nuestra API
 app.use(express.json());
 
 
 // Rutas / Endpoints
-router.use('/', router);
+app.use('/', router);
 
-
+// Levantar el servidor
 app.listen(config.mysqlService.port, () => {
     console.log(`mysql Service ready on: http://localhost:${config.mysqlService.port}`);
 })

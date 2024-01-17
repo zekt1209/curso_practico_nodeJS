@@ -8,9 +8,9 @@ module.exports = {
     mysql: {
         // Link del host de mysql: https://www.freemysqlhosting.ne
         host: process.env.MYSQL_HOST || 'sql10.freemysqlhosting.net',
-        user: process.env.MYSQL_USER || 'sql10675580',
-        password: process.env.MYSQL_PASSWORD || 'eTftaagAxc',
-        database: process.env.MYSQL_DATABASE || 'sql10675580',
+        user: process.env.MYSQL_USER || 'sql10677467',
+        password: process.env.MYSQL_PASSWORD || 'rqPnyVCtQv',
+        database: process.env.MYSQL_DATABASE || 'sql10677467',
     },
     mysqlService: {
         port: process.env.MYSQL_SRV_PORT || 3001,
