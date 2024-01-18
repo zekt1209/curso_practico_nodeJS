@@ -34,6 +34,10 @@ function createRemoteDB(host, port) {
             })
         })
     }
+
+    return {
+        list,
+    }
     
 }
 
