@@ -14,7 +14,8 @@ const user = require("./components/user/network.js");
 // Llamamos a la parte de red de nuestro componente "auth"
 const auth = require("./components/auth/network.js");
 // Llamamos a la parte de red de nuestro componente "post"
-const post = require("./components/post/network.js");
+// **** Update, lo quitamos porque ya tiene su propio microservicio
+// const post = require("./components/post/network.js");
 // ----------------------------------------------------------
 
 
@@ -40,8 +41,6 @@ app.get("/", (req, res) => {
 app.use("/api/user", user);
 // Auth
 app.use("/api/auth", auth);
-// Post
-app.use("/api/post", post);
 // Documentacion
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
