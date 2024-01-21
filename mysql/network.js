@@ -9,6 +9,7 @@ router.get('/:table', list);
 router.get('/:table/:id', get);
 router.post('/:table', insert);
 router.put('/:table/:id', upsert);
+router.delete('/:table/:id', remove);
 
 // Operaciones directas a la DB, sin preocuparnos de construir las DB denuevo, ni que le tenemos que pasar
 
@@ -46,6 +47,15 @@ async function upsert(req, res, next) {
         response.success(req, res, datos, 201);
     } catch (err) {
         console.log('Error en funcion upsert del microservicio de mysql, error para el dev: ' + err);
+    }
+}
+
+async function remove(req, res, next) {
+    try {
+        const datos = await Storage.remove(req.params.table, req.params.id);
+        response.success(req, res, datos, 201);
+    } catch (err) {
+        console.log('Error en funcion remove del microservicio de mysql, error para el dev: ' + err);
     }
 }
 

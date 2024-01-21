@@ -17,13 +17,18 @@ function createRemoteDB(host, port) {
         // let url = URL +'/'+ table;
         // body = '';
 
+        if (method == 'POST' || method == 'PUT') {
+            data = JSON.stringify(data);
+        }
+
         try {                
             const response = await remoteDataBaseCall({
                 method: method,
                 url: url,
                 data: data
             });
-
+            console.log('request: ' + JSON.stringify(data));
+            console.log('response: ' + JSON.stringify(response.data.body));
             return response.data.body;
 
         } catch (err) {
@@ -58,19 +63,46 @@ function createRemoteDB(host, port) {
     function insert(table, data) {
             return req({
                 method: 'POST',
-                url: `${table}`,
+                url: `/${table}`,
                 data});
     }
     
-    function update(table, data_id, data) {
-        throw new Error('Not Implemented');
+    function update(table, data) {
+        // throw new Error('Not Implemented');
+        return req({
+            method: 'PUT',
+            url: `/${table}/${data.id}`,
+            data});
     }
     
     async function upsert(table, data) {
+        // return req({
+        //     method: 'PUT',
+        //     url: `upsert/${table}`,
+        //     data});
+
+        let row = [];
+
+        if (data.id) {
+            // Valida si ya existe ese usuario en la DB
+            row = await get(table, data.id);
+        }
+    
+        if (row.length === 0) {
+            // No existe
+            console.log('Entre al metodo insert')
+            return insert(table, data);
+        } else {
+            // Si existe
+            console.log('Entre al metodo update')
+            return update(table, data);
+        }
+    }
+
+    async function remove(table, id) {
         return req({
-            method: 'PUT',
-            url: `upsert/${table}`,
-            data});
+            method: 'DELETE',
+            url: `${table}/${id}`});
     }
 
 
@@ -104,6 +136,7 @@ function createRemoteDB(host, port) {
         insert,
         update,
         upsert,
+        remove,
     }
     
 }
