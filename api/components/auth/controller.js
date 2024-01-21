@@ -20,7 +20,6 @@ module.exports = function(injectedStorage) {
     async function login(username, password) {
         // Hacemos un query a la base de datos para sacar el username y password
         const data = await storage.query(TABLA, { username: username })
-
         // Encadenamos promess para en ves de devolver true o false si la contraseña hasheada es la que tenemos en la base de datos, nos devuelva el token
         return bcrypt.compare(password, data.password)
             .then(sonIguales => {

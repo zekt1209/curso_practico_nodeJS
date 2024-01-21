@@ -46,7 +46,7 @@ module.exports = function(injectedStorage) {
     async function getByUser(userId) {
         let row = [];
 
-        row = await storage.query(TABLA, {
+        row = await storage.queryArrayList(TABLA, {
             user: userId
         })
 

@@ -88,7 +88,7 @@ module.exports = function (injectedStorage) {
         join[TABLA] = 'user_to'; // {user: user_to}
         const query = { user_from: user };
 
-        return await storage.query(`${TABLA}_follow`, query, join);
+        return await storage.queryArrayList(`${TABLA}_follow`, query, join);
     }
 
     // Devolvemos los metodos como lo haciamos antes
