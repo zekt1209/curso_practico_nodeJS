@@ -1,4 +1,5 @@
 module.exports = {
+    remoteDB: process.env.REMOTE_DB || false,
     api: {
         port: process.env.API_PORT || 3000,
     },
@@ -10,10 +11,12 @@ module.exports = {
     },
     mysql: {
         // Link del host de mysql: https://www.freemysqlhosting.ne
+        // vijeno3308@wentcity.com
+        // test123
         host: process.env.MYSQL_HOST || 'sql10.freemysqlhosting.net',
-        user: process.env.MYSQL_USER || 'sql10677467',
-        password: process.env.MYSQL_PASSWORD || 'rqPnyVCtQv',
-        database: process.env.MYSQL_DATABASE || 'sql10677467',
+        user: process.env.MYSQL_USER || 'sql10679568',
+        password: process.env.MYSQL_PASSWORD || 'FNvwicewvZ',
+        database: process.env.MYSQL_DATABASE || 'sql10679568',
     },
     mysqlService: {
         host: process.env.MYSQL_SRV_HOST || 'localhost',
