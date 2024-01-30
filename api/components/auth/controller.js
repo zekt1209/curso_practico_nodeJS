@@ -1,6 +1,6 @@
 // Debe tener acceso a network
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const token = require('../../../token/index');
 // Modulo para gestion avanzada de errores
 const error = require("../../../utils/error");

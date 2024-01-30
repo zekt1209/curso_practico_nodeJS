@@ -15,7 +15,7 @@ if (index != "-1") {
 // compare(data: string | Buffer, encrypted: string): Promise<boolean>
 // The data to be encrypted.
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 // @return — A promise to be either resolved with the comparison result salt or rejected with an Error
 
