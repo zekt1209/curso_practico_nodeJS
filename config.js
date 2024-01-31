@@ -25,5 +25,12 @@ module.exports = {
     cacheService: {
         host: process.env.CACHE_SRV_HOST || 'localhost',
         port: process.env.CACHE_SRV_PORT || 3003,
+    },
+    redis: {
+        host: process.env.REDIS_SRV_HOST || 'redis-10212.c325.us-east-1-4.ec2.cloud.redislabs.com',
+        port: process.env.REDIS_SRV_PORT || 10212,
+        password: process.env.REDIS_SRV_PASSWORD || 'dVhQhBLxAxcyMUqp8DioE0A9fuwnh7R0',
+        user: process.env.REDIS_SRV_USER || 'default',
+        database: process.env.REDIS_SRV_DATABASE || 'VICTORJAVIER-free-db',
     }
 }
