@@ -44,8 +44,11 @@ const client = redis.createClient({
 
 async function list(table) {
     try {
+        
         const value = await client.get(table);
+        console.log(value);
         return JSON.parse(value);
+
     } catch (err) {
         console.log('Error en function list de redis: ' + err);
     }
@@ -69,6 +72,7 @@ async function get(table, id) {
     client.setEx(key, 10, JSON.stringify(data));
     return true;
 } */
+
 
 async function upsert(table, data) {
     try {

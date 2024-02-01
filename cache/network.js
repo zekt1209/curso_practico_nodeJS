@@ -7,7 +7,8 @@ const router = express.Router();
 
 router.get('/:table', list);
 router.get('/:table/:id', get);
-router.put('/:table/:id', upsert);
+router.post('/:table', upsert);
+router.put('/:table', upsert);
 
 // Operaciones directas a la DB, sin preocuparnos de construir las DB denuevo, ni que le tenemos que pasar
 
