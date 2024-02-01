@@ -3,7 +3,7 @@ Backend completo de la red social minimalista PlatziSocial. Creamos microservici
 
 # Aqui podras hacer las consultas a las endpoints
 
-<a href="https://vercel.com/victor-guzmans-projects/curso-practico-node-js" target="_blank">Go</a>
+<a href="https://vercel.com/victor-guzmans-projects/curso-practico-node-js" target="_blank">https://vercel.com/victor-guzmans-projects/curso-practico-node-js</a>
 
 # Documentacion de la API
 
