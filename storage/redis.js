@@ -44,9 +44,10 @@ const client = redis.createClient({
 
 async function list(table) {
     try {
-        
+
         const value = await client.get(table);
         console.log(value);
+        // await client.disconnect();
         return JSON.parse(value);
 
     } catch (err) {
@@ -80,7 +81,7 @@ async function upsert(table, data) {
         if (data && data.id) {
             key = key + '_' + data.id;
         }
-        await client.set(key, JSON.stringify(data));
+        await client.set(key, 10, JSON.stringify(data));
         return true;
 
     } catch (err) {

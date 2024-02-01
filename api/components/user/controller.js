@@ -7,18 +7,33 @@ const auth = require("../auth");
 const TABLA = "user";
 const ID = "2";
 
-module.exports = function (injectedStorage) {
+module.exports = function (injectedStorage, injectedCache) {
     // Le decimos que estaremos usando la DB que le inyerctamos en el index.js del usuario
     let storage = injectedStorage;
-
+    let cache = injectedCache;
+    
     // Si no viene alguna DB inyectada, o viene algun valor no valido, usamos directamente nuestra DB dummy
     if (!storage) {
         storage = require("../../../storage/dummy");
     }
+    
+    if (!cache) {
+        cache = require("../../../storage/dummy");
+    }
+
 
     // Metimos aqui en el export estas funciones que hace la DB, para que tome la DB que le inyectamos
-    function list() {
-        return storage.list(TABLA);
+    async function list() {
+        let users = await cache.list(TABLA);
+        // let users;
+        if (!users) {
+            console.log('No estaba en cache, buscando en DB');
+            users = storage.list(TABLA);
+        } else {
+            console.log('Nos traemos datos de cache');
+        }
+
+        return users;
     }
 
     function get(id) {

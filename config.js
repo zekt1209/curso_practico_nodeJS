@@ -10,13 +10,13 @@ module.exports = {
         secret: process.env.JWT_SECRET || 'secreto',
     },
     mysql: {
-        // Link del host de mysql: https://www.freemysqlhosting.ne
-        // vijeno3308@wentcity.com
+        // Link del host de mysql: https://www.freemysqlhosting.net
+        // pocexe1842@alibrs.com
         // test123
-        host: process.env.MYSQL_HOST || 'sql10.freemysqlhosting.net',
-        user: process.env.MYSQL_USER || 'sql10679568',
-        password: process.env.MYSQL_PASSWORD || 'FNvwicewvZ',
-        database: process.env.MYSQL_DATABASE || 'sql10679568',
+        host: process.env.MYSQL_HOST || 'sql5.freemysqlhosting.net',
+        user: process.env.MYSQL_USER || 'sql5681261',
+        password: process.env.MYSQL_PASSWORD || '883KkQLQAS',
+        database: process.env.MYSQL_DATABASE || 'sql5681261',
     },
     mysqlService: {
         host: process.env.MYSQL_SRV_HOST || 'localhost',
