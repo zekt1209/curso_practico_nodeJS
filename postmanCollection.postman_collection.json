@@ -1,0 +1,294 @@
+{
+	"info": {
+		"_postman_id": "dc2e4ec2-d083-427c-a615-ee23423906a7",
+		"name": "Collection_Platzi_Red_Social",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "32058741"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Consultar usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/user/"
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar usuario por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/user/"
+					},
+					"response": []
+				},
+				{
+					"name": "Insertar usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"12345\",\r\n    \"name\": \"Javier\",\r\n    \"username\": \"abogadoJavier\",\r\n    \"password\": \"secretPassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/user"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"codingVictor\",\r\n    \"password\": \"secretPassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Editar usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyMyIsInVzZXJuYW1lIjoiY29kaW5nVmljdG9yIiwicGFzc3dvcmQiOiIkMmIkMDUkN2JlV1BWNEFjT1lTSVFrbFhGU0hRT1cuS01LUGJoN3A3R3dqL1BFT2tuYko3c2RidnVtWm0iLCJpYXQiOjE3MDUxMzE5ODN9.jz_11zbsIv7sReV4hY9jb5Xii3COPM71ZV3O4FGYOdE"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"123\",\r\n    \"name\": \"Vic\",\r\n    \"username\": \"codingVictor\",\r\n    \"password\": \"secretPassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/user/"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/user/346"
+					},
+					"response": []
+				},
+				{
+					"name": "Follow user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyMyIsInVzZXJuYW1lIjoiY29kaW5nVmljdG9yIiwicGFzc3dvcmQiOiIkMmIkMDUkRmYuT1NENUVFTlFWMHYzYzhBMlBZLjdrdUpLZnBRSE5rbTZLNXhMYXV5ZU0yQ0NHeDRVOG0iLCJpYXQiOjE3MDUxMzMzMTV9.b8t0r2xSeUmJhCSy790pkl_ST3y3AMXa7TZneyAYE8Q"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/user/follow/12345"
+					},
+					"response": []
+				},
+				{
+					"name": "Following",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/user/123/following"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Consultar posts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/post"
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar posts por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/post/user/123"
+					},
+					"response": []
+				},
+				{
+					"name": "Insertar post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"id\": \"3\",\r\n    \"text\": \"Hola que hace\",\r\n    \"user\":\"123\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/post"
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Post",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"if55spLVaFysMISEe0bPS\",\r\n    \"text\": \"Post by me (codingVictor) jiji\",\r\n    \"user\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/post"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Post",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/api/post/Cp3To1BYcByuORbWAdXFy"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "microservicio mysql",
+			"item": [
+				{
+					"name": "user",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cache",
+			"item": [
+				{
+					"name": "Obtener usuarios",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener usuario por ID",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Insertar usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"codingVictor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3003/user/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Insertar usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"codingChiquis\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3003/user"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
