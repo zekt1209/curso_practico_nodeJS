@@ -24,8 +24,8 @@ module.exports = function (injectedStorage, injectedCache) {
 
     // Metimos aqui en el export estas funciones que hace la DB, para que tome la DB que le inyectamos
     async function list() {
-        let users = await cache.list(TABLA);
-        // let users;
+        // let users = await cache.list(TABLA);
+        let users;
         if (!users) {
             console.log('No estaba en cache, buscando en DB');
             users = storage.list(TABLA);
