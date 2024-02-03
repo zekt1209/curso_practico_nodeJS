@@ -4,7 +4,8 @@
   "description": "Backend completo de la red social minimalista PlatziSocial. Crea microservicios con usuarios, posts, follow e interacciones.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pm2": "pm2 start api/index.js --name api-principal && pm2 start mysql/index.js --name api-mysql && pm2 start post/index.js --name api-post",
+    "pm2-stop": "pm2 stop api-principal && pm2 stop api-mysql && pm2 stop api-post"
   },
   "repository": {
     "type": "git",
